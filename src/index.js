@@ -11,10 +11,18 @@ function Square(props){
       <button 
         className="square" 
         onClick={props.onClick}
+        style={color(props.value)} 
       >
         {props.value}
       </button>
     );
+  }
+
+  function color(value){
+    if(value === 'X')
+      return { color: "red" };
+    if(value === 'O')
+      return { color: "blue" };
   }
   
   class Board extends React.Component {
@@ -88,13 +96,6 @@ function Square(props){
       });
     }
 
-    // andleClick(i) {
-    //   const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    //   const current = history[history.length - 1];
-    //   const squares = current.squares.slice();
-
-    // }
-
     jumpToMove(index){
       this.setState({
         stepNumber: index,
@@ -126,7 +127,7 @@ function Square(props){
         
         return (
           <li key={index}>
-            <Button color="primary" onClick={()=>{
+            <Button outline color="primary" onClick={()=>{
               return this.jumpToMove(index);
             }}>{description}</Button> 
           </li>
